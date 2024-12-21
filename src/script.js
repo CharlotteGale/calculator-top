@@ -1,16 +1,22 @@
-// addition function
-function addition(num1, num2) {
-     return num1 + num2;
+const display = document.getElementById('display');
+let isResultDisplayed = false;
+
+function appendToDisplay(input) {
+     if (isResultDisplayed) { 
+          display.value = ''; 
+          isResultDisplayed = false; }
+     display.value += input;
 };
-// subtraction function
-function subtraction(num1, num2) {
-     return num1 - num2;
+
+function clearDisplay() {
+     display.value = "";
 };
-// multiplication function
-function multiplication(num1, num2) {
-     return num1 * num2;
-};
-// division function
-function division(num1, num2) {
-     return num1 / num2;
-};
+
+function calculate() {
+     try {
+          display.value = new Function('return ' + display.value)();
+          isResultDisplayed = true;
+     } catch (error) {
+          display.value = 'ERROR!'
+     }
+}
